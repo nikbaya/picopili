@@ -162,9 +162,9 @@ for chrom in xrange(1,22):
     samp_out = str(shape_dir)+'/'+str(outdot)+'.chr'+str(chrom)+'.phased.sample'
 
     if not os.path.isfile(haps_out):
-        bad_chr.append(chrom)
+        bad_chr.append(str(chrom))
     elif not os.path.isfile(samp_out):
-        bad_chr.append(chrom)
+        bad_chr.append(str(chrom))
         
 
 # if any shapeit jobs failed, 
