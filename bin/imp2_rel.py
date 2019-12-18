@@ -237,7 +237,7 @@ if bad_chr:
                "thread_str": '--thread '+str(args.threads),
                "seed_str": '--seed '+str(args.shape_seed),
                "outmax": '--output-max '+str(outstem)+'.phased.haps '+str(outstem)+'.phased.sample',
-               "shapelog": str(outstem)+'.shape.resub_'+str(num_chr)+'.log',
+               "shapelog": '--output-log '+str(outstem)+'.shape.resub_'+str(num_chr)+'.log',
 	       "cbopen":'{{',
 	       "cbclose":'}}',
                }    
