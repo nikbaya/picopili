@@ -296,12 +296,12 @@ else:
     duo_txt = '--duohmm'
 
 # TODO: handle empty chromosomes
-chrstem = str(args.bfile)+'.hg19.ch.fl.chr{task}'
-outstem = str(outdot)+'.chr{task}'
-map_arg = str(args.ref_maps).replace('###','{task}')
-hap_arg = str(args.ref_haps).replace('###','{task}')
-leg_arg = str(args.ref_legs).replace('###','{task}')
-samp_arg = str(args.ref_samps).replace('###','{task}')
+chrstem = str(args.bfile)+'.hg19.ch.fl.chr23'
+outstem = str(outdot)+'.chr23'
+map_arg = str(args.ref_maps).replace('###','23')
+hap_arg = str(args.ref_haps).replace('###','23')
+leg_arg = str(args.ref_legs).replace('###','23')
+samp_arg = str(args.ref_samps).replace('###','23')
 
 shape_call = [shapeit_ex,
               '--input-bed', chrstem+'.bed', chrstem+'.bim', chrstem+'.fam',
@@ -320,15 +320,15 @@ print ' '.join(shape_call)+'\n'
 configs = read_conf(os.environ['HOME']+'/picopili.conf')
 clust_confdir = os.path.dirname(str(rp_bin))+'/cluster_templates/'
 clust_conf = read_conf(clust_confdir+str(configs['cluster']+'.conf'))
-task_id = str(clust_conf['log_task_id'])
+task_id = str(23) # str(clust_conf['log_task_id'])
 
 # submit
 jobres = send_job(jobname='shape.'+str(outdot),
                   cmd=' '.join(shape_call),
                   logname='shape.'+str(outdot)+'.chr'+task_id+'.sub.log',
                   mem=int(args.mem_req)*1000,
-                  walltime=30,
-                  njobs=22,
+                  walltime=100, # edited for SPARK sample size
+                  njobs=1, # edited for chr 23 imputation
                   threads=int(args.threads),
                   sleep=str(args.sleep))
 
